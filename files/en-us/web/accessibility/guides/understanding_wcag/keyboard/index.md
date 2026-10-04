@@ -16,11 +16,15 @@ If an element can be focused using the keyboard, then it should be interactive; 
 
 Most interactive elements are focusable by default; you can make an element focusable by adding a `tabindex=0` attribute value to it. However, you should only add `tabindex` if you have also made the element interactive, for example, by defining appropriate event handlers keyboard events.
 
+> [!NOTE]
+> Handling keyboard events alone may not be enough. Some screen readers and other assistive technologies intercept <kbd>Enter</kbd> and <kbd>Space</kbd> when a custom control is focused, then dispatch a `click` event in their place without firing the corresponding `keydown` or `keyup` handler. A control that only listens for keyboard events therefore appears not to respond for those users. Where activation is expected, handle `click` alongside the keyboard events, or where possible use a native element such as [`<button>`](/en-US/docs/Web/HTML/Reference/Elements/button), which already implements this behavior.
+
 ### See also
 
 - [tabindex](/en-US/docs/Web/HTML/Reference/Global_attributes/tabindex) global HTML attribute
 - Element: [keydown event](/en-US/docs/Web/API/Element/keydown_event)
 - Element: [keyup event](/en-US/docs/Web/API/Element/keyup_event)
+- [NVDA: activating a custom button fires a click event instead of keydown](https://github.com/nvaccess/nvda/issues/7898)
 
 ## Avoid using `tabindex` attribute greater than zero
 
