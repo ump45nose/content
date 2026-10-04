@@ -52,7 +52,7 @@ A related feature — **interest invokers** — can be used to show popovers on 
 ## CSS features
 
 - {{cssxref("::backdrop")}}
-  - : The `::backdrop` pseudo-element is a full-screen element placed directly behind popover elements, allowing effects to be added to the page content behind the popover(s) if desired (for example blurring it out).
+  - : The `::backdrop` pseudo-element is a full-screen element placed directly behind popover elements, allowing effects to be added to the page content behind the popover(s) if desired (for example blurring it out). Note that this is a purely visual effect: a popover with a blurred backdrop is still a *non-modal* popover, so the rest of the page stays focusable and readable by assistive technology. If you need the rest of the page to be inert, use a modal {{htmlelement("dialog")}} element instead — see the [`dialog` role](/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/dialog_role) for what that requires.
 - {{cssxref("interest-delay")}}, {{cssxref("interest-delay-start")}}, and {{cssxref("interest-delay-end")}} {{experimental_inline}}
   - : The `interest-delay` shorthand property and its related `interest-delay-start` and `interest-delay-end` longhands can be used to add a delay between the user showing or losing interest and the browser acting on that change.
 - {{cssxref(":interest-source")}} and {{cssxref(":interest-target")}}
@@ -105,6 +105,22 @@ A related feature — **interest invokers** — can be used to show popovers on 
 
 - See our collection of [Popover API examples](https://mdn.github.io/dom-examples/popover-api/).
 - See our collection of [interest invoker examples](https://mdn.github.io/dom-examples/interest-invokers/).
+
+> [!NOTE]
+> The demo collections above exist to show how the Popover API can be used, and are not
+> reference implementations of accessible components. Several of them need accessibility
+> work that the API does not do for you:
+>
+> - Blurring or obscuring the rest of the page with `::backdrop` does not make a popover
+>   modal, and does not make the background content inert.
+> - A group of popovers laid out as a menu is not an ARIA [`menu`](/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/menu_role);
+>   it needs the corresponding roles, states, and keyboard handling to be one.
+> - A popover used as a status message or notification is not announced automatically —
+>   put its content in an [ARIA live region](/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions)
+>   if it needs to be announced when it appears.
+>
+> Before reusing any of these patterns, read
+> [Popover accessibility features](/en-US/docs/Web/API/Popover_API/Using#popover_accessibility_features).
 
 ## Specifications
 
